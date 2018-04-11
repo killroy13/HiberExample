@@ -6,15 +6,22 @@ import javax.persistence.*;
  * Created by User on 10.04.2018.
  */
 @Entity
-@Table(name = "owners", schema = "", catalog = "hibernate_test_db")
+@Table(name = "owners")
 public class Owner {
 
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String firstName;
     private String secondName;
 
+    public Owner(){}
+
+    public Owner(String firstName, String secondName){
+        this.firstName= firstName;
+        this.secondName= secondName;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false, insertable = true, updatable = true)
     public int getId() {
         return id;
@@ -68,10 +75,10 @@ public class Owner {
 
     @Override
     public String toString() {
-        return "OwnersEntity{" +
+        return "Owner {" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                '}';
+                '}' + "\n";
     }
 }
