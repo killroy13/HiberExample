@@ -90,19 +90,19 @@ public class Owner implements Serializable{
 
     @Override
     public String toString() {
-        String pet = "";
-        if ((pets != null) && (pets.size() > 0)) {
-            for (int i = 0; i < pets.size(); i++) {
-                if (i > 0)
-                    pet += ",";
-                pet += pets.get(i).toString();
-            }
-        }
+//        String pet = "";
+//        if ((pets != null) && (pets.size() > 0)) {
+//            for (int i = 0; i < pets.size(); i++) {
+//                if (i > 0)
+//                    pet += ",";
+//                pet += pets.get(i).toString();
+//            }
+//        }
 
         return "Owner {" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                '}' + "', pets =[" + pet + "]}" + "\n";
+                '}' + /*"', pets =[" + pet + "]}" + */"\n";
     }
 }

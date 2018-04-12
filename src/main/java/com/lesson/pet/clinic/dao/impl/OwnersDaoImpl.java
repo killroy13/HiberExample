@@ -3,6 +3,7 @@ package com.lesson.pet.clinic.dao.impl;
 import com.lesson.pet.clinic.dao.OwnersDao;
 import com.lesson.pet.clinic.dao.exception.DaoException;
 import com.lesson.pet.clinic.entity.Owner;
+import com.lesson.pet.clinic.entity.Pet;
 import com.lesson.pet.clinic.utils.HibernateUtil;
 import org.hibernate.Session;
 
@@ -44,6 +45,20 @@ public class OwnersDaoImpl implements OwnersDao {
         return result;
     }
 
+    public List<Pet> getAllPetByOwnerId(int id) throws DaoException {
+        List<Pet> result;
+        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        try {
+            session.beginTransaction();
+            result = session.createQuery("from Pet where " + "owner.id = " + id).list();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            session.getTransaction().rollback();
+            throw new DaoException("Error in getAllPetByOwnerId method: " + ex);
+        }
+        return result;
+    }
+
     public void insert(Owner owner) throws DaoException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
@@ -58,12 +73,12 @@ public class OwnersDaoImpl implements OwnersDao {
 
     public void update(Owner owner) throws DaoException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        try{
+        try {
             session.beginTransaction();
             session.saveOrUpdate(owner);
             session.flush();
             session.getTransaction().commit();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             session.getTransaction().rollback();
             throw new DaoException("Error in update method", ex);
         }

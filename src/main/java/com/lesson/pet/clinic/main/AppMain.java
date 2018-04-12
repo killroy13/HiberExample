@@ -6,8 +6,6 @@ import com.lesson.pet.clinic.entity.Owner;
 import com.lesson.pet.clinic.entity.Pet;
 import com.lesson.pet.clinic.utils.HibernateUtil;
 
-import java.util.List;
-
 /**
  * Created by User on 10.04.2018.
  */
@@ -28,29 +26,28 @@ public class AppMain {
         owner2.setFirstName("Killy");
         owner2.setSecondName("CAtty");
 
-
-
         Pet pet1 = new Pet("dog", "Dorsy", owner1);
         Pet pet2 = new Pet("cat", "Billy", owner2);
-
 
 //        pet1.setOwner(owner1);
         pet2.setOwner(owner2);
 
-
         try {
 
-            petsDao.insert(pet2);
+//            petsDao.insert(pet2);
 
-            List<Pet> resultPet = petsDao.getAll();
-            System.out.println(resultPet);
+//            List<Pet> resultPet = petsDao.getAll();
+//            System.out.println(resultPet);
 
 //            ownersDao.insert(owner1);
 //            ownersDao.delete(2);
-            List<Owner> result = ownersDao.getAll();
-            System.out.println(result);
+//            List<Owner> result = ownersDao.getAll();
+//            System.out.println(result);
 //            ownersDao.update(owner2);
 //            System.out.println(ownersDao.getById(15));
+
+
+            System.out.println(ownersDao.getAllPetByOwnerId(15));
 
 
         } catch (Exception ex) {
