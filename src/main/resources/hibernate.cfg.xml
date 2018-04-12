@@ -31,6 +31,7 @@
 
         <!-- ENTITY mapping  -->
         <mapping class="com.lesson.pet.clinic.entity.Owner"/>
+        <mapping class="com.lesson.pet.clinic.entity.Pet"/>
 
 
     </session-factory>

@@ -1,17 +1,23 @@
 package com.lesson.pet.clinic.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by User on 10.04.2018.
  */
 @Entity
 @Table(name = "owners")
-public class Owner {
+public class Owner implements Serializable{
+
+    private static final long serialVersionUID = -5527566248002296042L;
 
     private int id;
     private String firstName;
     private String secondName;
+
+    private List<Pet> pets;
 
     public Owner(){}
 
@@ -31,7 +37,7 @@ public class Owner {
         this.id = id;
     }
 
-    @Basic
+//    @Basic
     @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 45)
     public String getFirstName() {
         return firstName;
@@ -41,7 +47,7 @@ public class Owner {
         this.firstName = firstName;
     }
 
-    @Basic
+//    @Basic
     @Column(name = "second_name", nullable = false, insertable = true, updatable = true, length = 45)
     public String getSecondName() {
         return secondName;
@@ -49,6 +55,15 @@ public class Owner {
 
     public void setSecondName(String secondName) {
         this.secondName = secondName;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER/*LAZY*/, mappedBy = "owner", cascade = CascadeType.ALL)
+    public List<Pet> getPets() {
+        return pets;
+    }
+
+    public void setPets(List<Pet> pets) {
+        this.pets = pets;
     }
 
     @Override
@@ -75,10 +90,19 @@ public class Owner {
 
     @Override
     public String toString() {
+        String pet = "";
+        if ((pets != null) && (pets.size() > 0)) {
+            for (int i = 0; i < pets.size(); i++) {
+                if (i > 0)
+                    pet += ",";
+                pet += pets.get(i).toString();
+            }
+        }
+
         return "Owner {" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                '}' + "\n";
+                '}' + "', pets =[" + pet + "]}" + "\n";
     }
 }

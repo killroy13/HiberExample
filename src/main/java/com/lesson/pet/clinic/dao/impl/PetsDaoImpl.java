@@ -1,41 +1,36 @@
 package com.lesson.pet.clinic.dao.impl;
 
-import com.lesson.pet.clinic.dao.OwnersDao;
+import com.lesson.pet.clinic.dao.PetsDao;
 import com.lesson.pet.clinic.dao.exception.DaoException;
-import com.lesson.pet.clinic.entity.Owner;
+import com.lesson.pet.clinic.entity.Pet;
 import com.lesson.pet.clinic.utils.HibernateUtil;
 import org.hibernate.Session;
 
 import java.util.List;
 
 /**
- * Created by User on 10.04.2018.
+ * Created by User on 11.04.2018.
  */
-//@Component("ownersDao")
-public class OwnersDaoImpl implements OwnersDao {
-
-
-    public Owner getById(int id) throws DaoException {
+public class PetsDaoImpl implements PetsDao {
+    public Pet getById(int id) throws DaoException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Owner owner;
+        Pet pet;
         try {
             session.beginTransaction();
-            owner = session.load(Owner.class, id);
-            //LazyInitializationException
-//            session.getTransaction().commit();
+            pet = session.load(Pet.class, id);
         } catch (Exception ex) {
             session.getTransaction().rollback();
             throw new DaoException("Error in getById method: " + ex);
         }
-        return owner;
+        return pet;
     }
 
-    public List<Owner> getAll() throws DaoException {
-        List<Owner> result;
+    public List<Pet> getAll() throws DaoException {
+        List<Pet> result;
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            result = session.createQuery("from Owner order by id").list();
+            result = session.createQuery("from Pet order by id").list();
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -44,11 +39,11 @@ public class OwnersDaoImpl implements OwnersDao {
         return result;
     }
 
-    public void insert(Owner owner) throws DaoException {
+    public void insert(Pet pet) throws DaoException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            session.save(owner);
+            session.save(pet);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
@@ -56,11 +51,11 @@ public class OwnersDaoImpl implements OwnersDao {
         }
     }
 
-    public void update(Owner owner) throws DaoException {
+    public void update(Pet pet) throws DaoException {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try{
             session.beginTransaction();
-            session.saveOrUpdate(owner);
+            session.saveOrUpdate(pet);
             session.flush();
             session.getTransaction().commit();
         }catch (Exception ex){
@@ -73,13 +68,12 @@ public class OwnersDaoImpl implements OwnersDao {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         try {
             session.beginTransaction();
-            Owner owner = session.get(Owner.class, id);
-            session.delete(owner);
+            Pet pet = session.get(Pet.class, id);
+            session.delete(pet);
             session.getTransaction().commit();
         } catch (Exception ex) {
             session.getTransaction().rollback();
             throw new DaoException("Error in delete method", ex);
         }
     }
-
 }

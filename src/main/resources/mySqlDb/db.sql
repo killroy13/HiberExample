@@ -8,11 +8,24 @@ CREATE TABLE IF NOT EXISTS owners (
   second_name VARCHAR(45)                        NOT NULL,
 );
 
-
 CREATE TABLE IF NOT EXISTS pets (
-  id          INT(11) AUTO_INCREMENT PRIMARY KEY    NOT NULL,
-  name        VARCHAR(100)                          NOT NULL,
-  user_id     VARCHAR(100)                          NOT NULL
+  pets_id     INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  kind_of_pet VARCHAR(45)     NOT NULL,
+  pets_name   VARCHAR(45)     NOT NULL,
+  owner_id    INT(11)         NOT NULL,
+  INDEX ownerId_idx (owner_id ASC),
+  CONSTRAINT ownerId
+  FOREIGN KEY (owner_id)
+  REFERENCES owners (id)
+);
+
+# ????????
+CREATE TABLE IF NOT EXISTS pets (
+  pets_id     INT(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  kind_of_pet VARCHAR(45)         NOT NULL,
+  pets_name   VARCHAR(45)         NOT NULL,
+  owner_id    INT(11)             NOT NULL,
+  INDEX ownerId_idx (owner_id ASC)
 );
 
 CREATE TABLE IF NOT EXISTS catalog (
