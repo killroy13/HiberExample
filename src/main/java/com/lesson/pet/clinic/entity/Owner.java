@@ -9,7 +9,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "owners")
-public class Owner implements Serializable{
+public class Owner implements Serializable {
 
     private static final long serialVersionUID = -5527566248002296042L;
 
@@ -19,11 +19,12 @@ public class Owner implements Serializable{
 
     private List<Pet> pets;
 
-    public Owner(){}
+    public Owner() {
+    }
 
-    public Owner(String firstName, String secondName){
-        this.firstName= firstName;
-        this.secondName= secondName;
+    public Owner(String firstName, String secondName) {
+        this.firstName = firstName;
+        this.secondName = secondName;
     }
 
     @Id
@@ -37,7 +38,7 @@ public class Owner implements Serializable{
         this.id = id;
     }
 
-//    @Basic
+    //    @Basic
     @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 45)
     public String getFirstName() {
         return firstName;
@@ -47,7 +48,7 @@ public class Owner implements Serializable{
         this.firstName = firstName;
     }
 
-//    @Basic
+    //    @Basic
     @Column(name = "second_name", nullable = false, insertable = true, updatable = true, length = 45)
     public String getSecondName() {
         return secondName;
@@ -90,19 +91,10 @@ public class Owner implements Serializable{
 
     @Override
     public String toString() {
-//        String pet = "";
-//        if ((pets != null) && (pets.size() > 0)) {
-//            for (int i = 0; i < pets.size(); i++) {
-//                if (i > 0)
-//                    pet += ",";
-//                pet += pets.get(i).toString();
-//            }
-//        }
-
         return "Owner {" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", secondName='" + secondName + '\'' +
-                '}' + /*"', pets =[" + pet + "]}" + */"\n";
+                '}' + "\n";
     }
 }
