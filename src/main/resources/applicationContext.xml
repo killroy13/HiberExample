@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+
+<context:component-scan base-package="com.lesson.pet.clinic"/>
+
+       <bean id="dataSource"
+             class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+              <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+              <property name="url" value="jdbc:mysql://localhost:3306/hibernate_test_db"/>
+              <property name="username" value="root"/>
+              <property name="password" value="user1"/>
+       </bean>
+
+
+       <bean id="hibernateSessionFactory"
+             class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+              <property name="dataSource" ref="dataSource" />
+              <property name="annotatedClasses">
+                     <list>
+                            <value>com.lesson.pet.clinic.entity.Owner</value>
+                            <value>com.lesson.pet.clinic.entity.Pet</value>
+                     </list>
+              </property>
+              <property name="hibernateProperties">
+                     <props>
+                            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                            <prop key="hibernate.connection.CharSet">utf8</prop>
+                            <prop key="hibernate.connection.characterEncoding">utf8</prop>
+                            <prop key="hibernate.connection.useUnicode">true</prop>
+                     </props>
+              </property>
+       </bean>
+
+
+</beans>
+

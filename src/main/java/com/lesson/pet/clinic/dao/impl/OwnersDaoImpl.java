@@ -6,14 +6,22 @@ import com.lesson.pet.clinic.entity.Owner;
 import com.lesson.pet.clinic.entity.Pet;
 import com.lesson.pet.clinic.utils.HibernateUtil;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 /**
  * Created by User on 10.04.2018.
  */
-//@Component("ownersDao")
-public class OwnersDaoImpl implements OwnersDao {
+//@Component/*("ownersDao")*/
+@Repository
+public class OwnersDaoImpl /*extends HibernateDaoSupport */implements OwnersDao {
+
+    @Autowired
+    private SessionFactory sessionFactory;
+
 
 
     public Owner getById(int id) throws DaoException {
@@ -47,7 +55,12 @@ public class OwnersDaoImpl implements OwnersDao {
 
     public List<Pet> getAllPetByOwnerId(int id) throws DaoException {
         List<Pet> result;
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+        Session session = sessionFactory.getCurrentSession();
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        Session session = sessionFactory.openSession();
+
+//        Session session = getHibernateTemplate().getSessionFactory().openSession();
+
         try {
             session.beginTransaction();
             result = session.createQuery("from Pet where " + "owner.id = " + id).list();

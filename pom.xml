@@ -10,7 +10,7 @@
 
     <properties>
         <hibernate-version>5.0.1.Final</hibernate-version>
-        <spring.version>4.1.1.RELEASE</spring.version>
+        <spring.version>4.3.7.RELEASE</spring.version>
 
     </properties>
 
@@ -37,11 +37,22 @@
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate-version}</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.hibernate</groupId>-->
+            <!--<artifactId>hibernate-annotations</artifactId>-->
+            <!--<version>3.3.1.GA</version>-->
+        <!--</dependency>-->
+
 
         <!--END Hibernate -->
 
 
         <!-- Spring -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -55,6 +66,13 @@
         </dependency>
         <!--END Spring -->
 
+
+        <!-- Apache Commons DBCP -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-dbcp2</artifactId>
+            <version>2.1.1</version>
+        </dependency>
     </dependencies>
 
 </project>
