@@ -13,23 +13,28 @@ public class Owner implements Serializable {
 
     private static final long serialVersionUID = -5527566248002296042L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     private int id;
+
+    @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 45)
     private String firstName;
+
+    @Column(name = "second_name", nullable = false, insertable = true, updatable = true, length = 45)
     private String secondName;
 
+    @OneToMany(fetch = FetchType.EAGER/*LAZY*/, mappedBy = "owner", cascade = CascadeType.ALL)
     private List<Pet> pets;
 
-    public Owner() {
-    }
+    public Owner() {}
 
     public Owner(String firstName, String secondName) {
         this.firstName = firstName;
         this.secondName = secondName;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+
     public int getId() {
         return id;
     }
@@ -38,8 +43,6 @@ public class Owner implements Serializable {
         this.id = id;
     }
 
-    //    @Basic
-    @Column(name = "first_name", nullable = false, insertable = true, updatable = true, length = 45)
     public String getFirstName() {
         return firstName;
     }
@@ -48,8 +51,6 @@ public class Owner implements Serializable {
         this.firstName = firstName;
     }
 
-    //    @Basic
-    @Column(name = "second_name", nullable = false, insertable = true, updatable = true, length = 45)
     public String getSecondName() {
         return secondName;
     }
@@ -58,7 +59,6 @@ public class Owner implements Serializable {
         this.secondName = secondName;
     }
 
-    @OneToMany(fetch = FetchType.EAGER/*LAZY*/, mappedBy = "owner", cascade = CascadeType.ALL)
     public List<Pet> getPets() {
         return pets;
     }

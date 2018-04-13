@@ -6,6 +6,8 @@ import com.lesson.pet.clinic.entity.Pet;
 /**
  * Created by User on 11.04.2018.
  */
-public interface PetsDao extends GenericDao<Pet>{
+public interface PetDao extends GenericDao<Pet>{
+
     Pet getById(int id) throws DaoException;
+
 }
