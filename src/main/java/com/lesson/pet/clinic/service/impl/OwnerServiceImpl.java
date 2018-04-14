@@ -26,6 +26,7 @@ public class OwnerServiceImpl implements OwnerService {
         return ownerDao.getById(id);
     }
 
+    @Transactional
     @Override
     public List<Pet> getAllPetByOwnerId(int id) throws DaoException {
         return ownerDao.getAllPetByOwnerId(id);

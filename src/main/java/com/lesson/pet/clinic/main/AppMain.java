@@ -60,7 +60,7 @@ public class AppMain {
             //owner
 
 //            ownersDao.insert(owner1);
-            ownerService.update(owner2);
+//            ownerService.update(owner2);
 //            ownersDao.delete(2);
 
 
@@ -73,7 +73,7 @@ public class AppMain {
             //pet
 
 //            petService.insert(pet2);
-            petService.update(pet4);
+//            petService.update(pet4);
 //            petService.delete(2);
 
 

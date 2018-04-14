@@ -48,7 +48,8 @@ public class AppConfig {
         properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.connection.pool_size", env.getProperty("hibernate.connection.pool_size"));
-        properties.put("hibernate.current_session_context_class", env.getProperty("hibernate.current_session_context_class"));
+        properties.put("spring.jpa.properties.hibernate.current_session_context_class", env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
+//        properties.put("hibernate.current_session_context_class", env.getProperty("hibernate.current_session_context_class"));
 
         factoryBean.setHibernateProperties(properties);
         factoryBean.setAnnotatedClasses(Pet.class, Owner.class);

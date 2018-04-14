@@ -20,7 +20,7 @@ public class PetDaoImpl implements PetDao {
     SessionFactory sessionFactory;
 
     public Pet getById(int id) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Pet pet;
         try {
             pet = session.get(Pet.class, id);
@@ -32,7 +32,7 @@ public class PetDaoImpl implements PetDao {
 
     public List<Pet> getAll() throws DaoException {
         List<Pet> result;
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             result = session.createQuery("from Pet order by petsId").list();
         } catch (Exception ex) {
@@ -43,7 +43,7 @@ public class PetDaoImpl implements PetDao {
 
     @Override
     public void update(Pet pet) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             session.saveOrUpdate(pet);
         } catch (Exception ex) {
@@ -53,7 +53,7 @@ public class PetDaoImpl implements PetDao {
 
     @Override
     public void delete(int id) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             Pet pet = session.get(Pet.class, id);
             session.delete(pet);
@@ -63,7 +63,7 @@ public class PetDaoImpl implements PetDao {
     }
 
     public void insert(Pet pet) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             session.save(pet);
         } catch (Exception ex) {

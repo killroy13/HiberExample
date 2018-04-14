@@ -21,7 +21,7 @@ public class OwnerDaoImpl implements OwnerDao {
     private SessionFactory sessionFactory;
 
     public Owner getById(int id) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Owner owner;
         try {
 //            session.beginTransaction();
@@ -47,7 +47,7 @@ public class OwnerDaoImpl implements OwnerDao {
 //        return query.getResultList();
 
         List<Owner> result;
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
         result = session.createQuery("from Owner order by id").list();
         } catch (Exception ex) {
@@ -58,8 +58,8 @@ public class OwnerDaoImpl implements OwnerDao {
 
     public List<Pet> getAllPetByOwnerId(int id) throws DaoException {
         List<Pet> result;
-        Session session = sessionFactory.openSession();
-//        Session session = sessionFactory.getCurrentSession();
+//        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
 //        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 //        Session session = getHibernateTemplate().getSessionFactory().openSession();
         try {
@@ -71,7 +71,7 @@ public class OwnerDaoImpl implements OwnerDao {
     }
 
     public void insert(Owner owner) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             session.save(owner);
         } catch (Exception ex) {
@@ -80,7 +80,7 @@ public class OwnerDaoImpl implements OwnerDao {
     }
 
     public void update(Owner owner) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
 //            session.beginTransaction();
             session.saveOrUpdate(owner);
@@ -93,7 +93,7 @@ public class OwnerDaoImpl implements OwnerDao {
     }
 
     public void delete(int id) throws DaoException {
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         try {
             Owner owner = session.get(Owner.class, id);
             session.delete(owner);
